@@ -6,24 +6,24 @@ defmodule Practice do
     Enum.at(list, length(list) - 1)
   end
 
-  def elementAt(list, pos) do
-    elementAt(list, pos, 0)
+  def element_at(list, pos) do
+    element_at(list, pos, 0)
   end
-  defp elementAt([head | tail], pos, current) do
+  defp element_at([head | tail], pos, current) do
     if pos == current do
       head
     else
-      elementAt(tail, pos, current + 1)
+      element_at(tail, pos, current + 1)
     end
   end
 
-  def myReverse(list) do
-    myReverse(list, [])
+  def my_reverse(list) do
+    my_reverse(list, [])
   end
-  defp myReverse([head | tail], newList) do
-    myReverse(tail, List.flatten([head, newList]))
+  defp my_reverse([head | tail], newList) do
+    my_reverse(tail, List.flatten([head, newList]))
   end
-  defp myReverse([], newList) do
+  defp my_reverse([], newList) do
     newList
   end
 
@@ -74,8 +74,8 @@ defmodule Practice do
   def encode(list) do
     encode(pack(list), [])
   end
-  defp encode([head|tail], encoded_list)do
-    encode(tail, encoded_list++[{length(head), List.last(head)}])
+  defp encode([head | tail], encoded_list)do
+    encode(tail, encoded_list ++ [{length(head), List.last(head)}])
   end
   defp encode([], encoded_list) do
     encoded_list
@@ -87,15 +87,25 @@ defmodule Practice do
   def decode([], decode_arr) do
     decode_arr
   end
-  def decode([{num, type}|tail], decode_arr) do
-      decode(tail, decode_arr++decode_run(type, [], num))
+  def decode([{num, type} | tail], decode_arr) do
+    decode(tail, decode_arr ++ decode_run(type, [], num))
   end
 
   def decode_run(type, decode_arr, cur_num) do
     if cur_num == 0 do
       decode_arr
-      else
+    else
       decode_run(type, [type | decode_arr], cur_num - 1)
+    end
+  end
+
+  def slice(list, start_indx, end_indx) do
+    slice(list, start_indx, end_indx, [])
+  end
+  defp slice(list, current_indx, end_indx, sub_list) do
+    cond do
+      current_indx == end_indx -> sub_list ++ [element_at(list, current_indx)]
+      current_indx < end_indx -> slice(list, current_indx + 1, end_indx, sub_list ++ [element_at(list, current_indx)])
     end
   end
 end
