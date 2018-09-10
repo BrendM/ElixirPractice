@@ -33,4 +33,10 @@ defmodule ElixirPracticeTest do
     assert compress(["a", "b", "c"]) == ["a", "b", "c"]
     assert compress(["a", "a", "c"]) == ["a", "c"]
   end
+
+  test "list packing" do
+    assert pack([1,2,2]) == [[1],[2,2]]
+    assert pack([]) == []
+    assert pack([1,1,1,1]) == [[1,1,1,1]]
+  end
 end

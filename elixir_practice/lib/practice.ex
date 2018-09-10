@@ -41,18 +41,33 @@ defmodule Practice do
   end
 
   def compress([head | tail]) do
-    puts(head)
-    puts(tail)
-    compress([head | tail], head, [])
+    compress([head | tail], head, [head])
   end
-  defp compress([head, tail], target, compressedList) do
+  defp compress([head | tail], target, compressedList) do
     if head == target do
       compress(tail, target, compressedList)
     else
       compress(tail, head, compressedList ++ [head])
     end
   end
-  defp compress([], nil, compressedList) do
+  defp compress([], _, compressedList) do
     compressedList
+  end
+
+  def pack([head | tail]) do
+    pack(tail, head, [head], [])
+  end
+  def pack([]) do
+    []
+  end
+  defp pack([head | tail], target, sub_pack, packed_list)do
+    if head == target do
+      pack(tail, head, sub_pack ++ [head], packed_list)
+    else
+      pack(tail, head, [head], packed_list ++ [sub_pack])
+    end
+  end
+  defp pack([], _, sub_pack, packed_list)do
+    packed_list ++ [sub_pack]
   end
 end
