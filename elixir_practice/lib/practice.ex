@@ -70,4 +70,32 @@ defmodule Practice do
   defp pack([], _, sub_pack, packed_list)do
     packed_list ++ [sub_pack]
   end
+
+  def encode(list) do
+    encode(pack(list), [])
+  end
+  defp encode([head|tail], encoded_list)do
+    encode(tail, encoded_list++[{length(head), List.last(head)}])
+  end
+  defp encode([], encoded_list) do
+    encoded_list
+  end
+
+  def decode(list) do
+    decode(list, [])
+  end
+  def decode([], decode_arr) do
+    decode_arr
+  end
+  def decode([{num, type}|tail], decode_arr) do
+      decode(tail, decode_arr++decode_run(type, [], num))
+  end
+
+  def decode_run(type, decode_arr, cur_num) do
+    if cur_num == 0 do
+      decode_arr
+      else
+      decode_run(type, [type | decode_arr], cur_num - 1)
+    end
+  end
 end

@@ -39,4 +39,16 @@ defmodule ElixirPracticeTest do
     assert pack([]) == []
     assert pack([1,1,1,1]) == [[1,1,1,1]]
   end
+
+  test "run=length encoding" do
+    assert encode([1,2,2]) == [{1, 1}, {2, 2}]
+    assert encode(["a","b","b"]) == [{1, "a"}, {2, "b"}]
+  end
+
+  test "run-lenght decode" do
+    assert decode([{1, 1}, {2, 2}]) == [1,2,2]
+    assert decode(encode([1,2,2])) == [1,2,2]
+    assert decode([{5, "a"}, {2, 2}]) == ["a","a","a","a","a",2,2]
+    assert decode(encode(["a","a","a","a","a",2,2])) == ["a","a","a","a","a",2,2]
+  end
 end
