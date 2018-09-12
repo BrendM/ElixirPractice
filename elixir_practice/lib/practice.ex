@@ -108,4 +108,19 @@ defmodule Practice do
       current_indx < end_indx -> slice(list, current_indx + 1, end_indx, sub_list ++ [element_at(list, current_indx)])
     end
   end
+
+  def remove_at(list, indx) do
+    remove_at(list, indx, 0, [])
+  end
+  defp remove_at([head|tail], indx, cur_indx, nw_lst) do
+    if indx == cur_indx do
+      remove_at(tail, indx, cur_indx + 1, nw_lst)
+      else
+      remove_at(tail, indx, cur_indx + 1, nw_lst ++ [head])
+    end
+  end
+  defp remove_at([], _, _, nw_lst) do
+    nw_lst
+  end
+
 end

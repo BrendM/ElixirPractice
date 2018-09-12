@@ -56,4 +56,9 @@ defmodule ElixirPracticeTest do
     assert slice([1, 2, 3], 1, 2) == [2, 3]
     assert slice([1, 2, 3, 4, 5], 0, 4) == [1, 2, 3, 4, 5]
   end
+
+  test "removing at index" do
+    assert remove_at([0, 1, 2], 0) == [1, 2]
+    assert remove_at([0, 1, 2, 3], 3) == [0, 1, 2]
+  end
 end
